@@ -16,7 +16,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    sh 'docker push 20221174/oss:latest'
+                    sh 'docker push 20221174/oss:1.0'
                 }
             }
         }
