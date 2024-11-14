@@ -3,24 +3,23 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git 'https://your-repo-url.git' // 코드 저장소 URL
+                git branch: 'main', url: 'https://github.com/20221174/oss' // GitHub 저장소 URL과 브랜치
             }
         }
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build('my-node-app:latest')
+                    sh 'docker build -t 20221174/oss:1.0 .'
                 }
             }
         }
-        stage('Push to Registry') {
+        stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://your-registry-url', 'docker-credentials-id') {
-                        docker.image('my-node-app:latest').push()
-                    }
+                    sh 'docker push 20221174/oss:latest'
                 }
             }
         }
     }
 }
+
